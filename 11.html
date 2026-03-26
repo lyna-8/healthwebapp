@@ -1,0 +1,1474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Recipe Navigation</title>
+  <style>
+    header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 10%;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+/* Logo */
+.logo {
+  display: none;
+}
+
+/* Menu button */
+.menu-btn {
+  display: flex;
+  font-size: 26px;
+  background: transparent;
+  border: none;
+  color: green;
+  cursor: pointer;
+}
+
+/* Navigation */
+nav {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  flex: 1;
+  margin-left: 20px;
+}
+
+.nav-btn {
+  padding: 10px 18px;
+  background-color: rgba(0, 128, 0, 0.7);
+  border: none;
+  border-radius: 20px;
+  color: white;
+  font-weight: 600;
+  text-decoration: none;
+  text-align: center;
+  transition: 0.3s;
+}
+
+.nav-btn:hover {
+  background-color: #00cc66;
+  transform: scale(1.05);
+}
+    body {
+      font-family: Arial, sans-serif;
+      background: #fff;
+      margin: 0;
+      padding: 0;
+    }
+    .nav-bar {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px 0;
+    }
+
+    .nav-bar h2 {
+      font-size: 2rem;
+      color:rgba(8, 53, 8, 0.998);;
+      margin-bottom: 30px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 60px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .nav-item {
+      text-align: center;
+      color: rgba(15, 143, 15, 0.959);;
+      text-decoration: none;
+      transition: transform 0.2s ease;
+    }
+
+    .nav-item:hover {
+      transform: scale(1.1);
+      color: #2c3e50;
+    }
+
+    .nav-item img {
+      width: 60px;
+      height: 60px;
+      margin-bottom: 10px;
+    }
+    .recipe-container {
+      max-width: 1000px;
+      margin: auto;
+      padding: 20px;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .recipe {
+      margin-bottom: 40px;
+    }
+
+    .recipe h3 {
+      font-size: 1.5rem;
+      color: #2c3e50;
+     
+    }
+
+    .recipe ul {
+      padding-left: 20px;
+    }
+
+    .recipe li {
+      margin-bottom: 5px;
+    }
+
+    .instructions {
+      margin-top: 10px;
+    }
+
+    .view-recipe {
+      margin-top: 10px;
+      display: inline-block;
+      background: #27ae60;
+      color: white;
+      padding: 8px 12px;
+      border-radius: 5px;
+      text-decoration: none;
+    }
+    .recipes-grid {
+  display: grid;
+  gap: 1.5rem;
+  padding: 2rem;
+}
+
+.recipe-card {
+  background: #fff;
+  border-radius: 30px;
+  width: 100%;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  grid-template-columns: repeat(3, 1fr);
+  overflow: hidden;
+  display: grid;
+  flex-direction: column;
+  transition: transform 0.2s;
+}
+
+.recipe-card:hover {
+  transform: translateY(-5px);
+}
+
+.recipe-img {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 12px 12px 0 0;
+  margin: 0 auto;
+  margin-top: 1rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.recipe-content {
+  padding: 1rem;
+}
+
+.recipe-content h3 {
+  margin: 0.5rem 0;
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 0.4rem;
+}
+
+.recipe-content p {
+  color: #555;
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-top: 0%;
+}
+
+.recipe-info {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 10px;
+  flex-wrap: wrap;
+}
+
+.macros {
+display: flex;
+  gap: 15px;
+  margin-bottom: 10px;
+  flex-wrap: wrap;
+  color: #333;
+   gap: 15px;
+}
+.back-to-top {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 60px;
+  height: 60px;
+  background-color: white;
+  color: green;
+  font-size: 28px;
+  font-weight: bold;
+  text-align: center;
+  line-height: 60px;
+  border-radius: 50%;
+  text-decoration: none;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); 
+  transition: all 0.3s ease;
+  z-index: 1000;
+}
+
+.back-to-top:hover {
+  background-color: #f1f1f1;
+}
+.recipe-container {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+  margin-bottom: 30px;
+  position: relative;
+}
+
+/* Partie pour la carte de la recette */
+.recipe-card {
+  flex: 1;
+  width: 50%;
+  background-color: #fff;
+  border-radius: 15px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+  padding: 15px;
+  cursor: pointer;
+}
+
+/* Partie pour la méthode de préparation */
+.recipe-method {
+  flex: 1;
+  width: 50%;
+  padding: 15px;
+  background-color:#fff;
+  border-radius: 15px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+  display: none;
+  animation: fadeIn 0.3s ease-in-out;
+  
+}
+.recipe-method h4 {
+  color: #27ae60;
+}
+.recipe-method li {
+  font-size: 0.97rem;
+  line-height: 1.6 ;
+}
+
+
+/* Animation d'apparition */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo"></div>
+    <nav id="nav">
+      <a href="index.html" class="nav-btn">Home</a>
+      <a href="calorie.html" class="nav-btn">Calorie Calculator</a>
+      <a href="workout.html" class="nav-btn">Home Workouts</a>
+      <a href="11.html" class="nav-btn">Healthy Tips</a>
+    </nav>
+  </header>
+  <section id="tips.html">
+  <div class="nav-bar">
+    <h2>Right Nutrision. Real results </h2>
+    <div class="nav-links">
+      <a href="#Animal Protein Dishes" class="nav-item">
+        <img src="1/photo_2025-04-30_01-13-52.jpg" alt="Chicken">
+        <div>Animal Protein Dishes </div>
+      </a>
+      <a href="#Low Carb" class="nav-item">
+        <img src="1/photo_2025-04-30_01-13-45.jpg" alt="Low Carb">
+        <div>Low Carb</div>
+      </a>
+      <a href="#Breakfast" class="nav-item">
+        <img src="1/photo_2025-04-30_01-13-37.jpg" alt="Breakfast">
+        <div>Breakfast</div>
+      </a>
+      <a href="#Shakes & Smoothies" class="nav-item">
+        <img src="1/30 free icons of Gym designed by Konkapp.jpg" alt="Shakes & Smoothiesr">
+        <div>Shakes & Smoothies</div>
+      </a>
+      <a href="#Salad" class="nav-item">
+        <img src="1/d1678bcc876fc1441c2a37a9dc496525.jpg" alt="Salad">
+        <div>Salad</div>
+      </a>
+    </div>
+  </div>
+  <section id="Animal Protein Dishes" >
+  <div class="Animal Protein Dishes">
+  <div class=recipe-container>
+  <div class="recipe-card" onclick="showMethod(this)">
+    <img src="1/Teriyaki Beef & Vegetable Stir Fry (1).jpg" alt="Beef Stir-Fry with Vegetables" class="recipe-img">
+    <div class="recipe-content">
+      <h3>Beef Stir-Fry with Vegetables</h3>
+      <p>A quick and flavorful high-protein stir-fry loaded with colorful veggies .</p>
+      <div class="recipe-info">
+        <span>🕒 25 min</span>
+        <span>🔥 480 kcal</span>
+      </div>
+      <div class="macros">
+        <span>🍗 38g Protein</span>
+        <span>🍞 30g Carbs</span>
+        <span>🥬 20g Fat</span>
+      </div>
+    </div>
+  </div>
+  <div class="recipe-method">
+    <h4>Preparation Method</h4>
+    <ul>
+      <li>Gather all the ingredients for Beef Stir-Fry with Vegetables.</li>
+      <li>Wash and prepare all vegetables or main ingredients.</li>
+      <li>Preheat the oven, stove, or grill if needed.</li>
+      <li>Season or marinate the main protein/vegetables for Beef Stir-Fry with Vegetables.</li>
+     <li>Start cooking the main protein (e.g., grilling, frying, baking).</li>
+     <li> Prepare the sides or accompanying ingredients (e.g., salad, rice, etc.).</li>
+     <li> Combine all cooked and raw ingredients as needed</li>  
+     <li>Taste and adjust seasoning (salt, pepper, herbs).</li>
+     <li> Let it rest if necessary or cool before serving.</li>
+     <li>Plate the Beef Stir-Fry with Vegetables attractively and serve!</li>
+    </ul>
+    <button onclick="hideMethod(this)">Close</button>
+  </div>
+  </div>
+  <div class=recipe-container>
+  <div class="recipe-card" onclick="showMethod(this)">
+    <img src="1/fd4b8792e2aafa5eb3a7f2a1f0e6f520.jpg" alt="Beef Stir-Fry with Vegetables" class="recipe-img">
+    <div class="recipe-content">
+      <h3>Baked Chicken Thighs with Sweet Potato</h3>
+      <p>A hearty and nutritious dish combining lean protein with complex carbs.</p>
+      <div class="recipe-info">
+        <span>🕒 45 min</span>
+        <span>🔥 500 kcal</span>
+      </div>
+      <div class="macros">
+        <span>🍗 42g Protein</span>
+        <span>🍞 40g Carbs</span>
+        <span>🥬 18g Fat</span>
+      </div>
+    </div>
+  </div>
+  <div class="recipe-method">
+    <h4>Preparation Method</h4>
+    <ul>
+      <li>Gather all the ingredients for Baked Chicken Thighs with Sweet Potato.</li>
+      <li>Wash and prepare all vegetables or main ingredients.</li>
+      <li> Preheat the oven, stove, or grill if needed</li>
+      <li>. Season or marinate the main protein/vegetables for Baked Chicken Thighs with Sweet Potato.</li>
+     <li>Start cooking the main protein (e.g., grilling, frying, baking).</li>
+     <li>Prepare the sides or accompanying ingredients (e.g., salad, rice, etc.).</li>
+     <li>Combine all cooked and raw ingredients as needed.</li>  
+     <li>Taste and adjust seasoning (salt, pepper, herbs).</li>
+     <li>Let it rest if necessary or cool before serving.</li>
+     <li> Plate the Baked Chicken Thighs with Sweet Potato attractively and serve!</li>
+    </ul>
+    <button onclick="hideMethod(this)">Close</button>
+  </div>
+  </div>
+  <div class=recipe-container>
+  <div class="recipe-card" onclick="showMethod(this)">
+    <img src="1/0ac2c33dd18029d3f454da4357fb5b59.jpg" alt="Lean Ground Beef Lettuce Wraps" class="recipe-img">
+    <div class="recipe-content">
+      <h3>Lean Ground Beef Lettuce Wraps</h3>
+      <p>A Low-carb and satisfying, these wraps are ideal for a clean, high-protein lunch.</p>
+      <div class="recipe-info">
+        <span>🕒 20 min</span>
+        <span>🔥 350 kcal</span>
+      </div>
+      <div class="macros">
+        <span>🍗 30g Protein</span>
+        <span>🍞 10g Carbs</span>
+        <span>🥬 22g Fat</span>
+      </div>
+    </div>
+  </div>
+  <div class="recipe-method">
+    <h4>Preparation Method</h4>
+    <ul>
+      <li> Gather all the ingredients for Lean Ground Beef Lettuce Wraps</li>
+      <li>Wash and prepare all vegetables or main ingredients</li>
+      <li>Preheat the oven, stove, or grill if needed.</li>
+      <li>Season or marinate the main protein/vegetables for Lean Ground Beef Lettuce Wraps.</li>
+     <li> Start cooking the main protein (e.g., grilling, frying, baking).</li>
+     <li>Prepare the sides or accompanying ingredients (e.g., salad, rice, etc.).</li>
+     <li>Combine all cooked and raw ingredients as needed.</li> 
+     <li>Taste and adjust seasoning (salt, pepper, herbs)</li>
+     <li> Let it rest if necessary or cool before serving</li>
+     <li>Plate the Lean Ground Beef Lettuce Wraps attractively and serve!</li>
+    </ul>
+    <button onclick="hideMethod(this)">Close</button>
+  </div>
+  </div>
+  <div class=recipe-container>
+  <div class="recipe-card" onclick="showMethod(this)">
+    <img src="1/433f5c6f81b50f3452a25bf26ef39935.jpg" alt="Chicken and Chickpea Stew" class="recipe-img">
+    <div class="recipe-content">
+      <h3>Chicken and Chickpea Stew</h3>
+      <p>A warm and comforting meal packed with protein and plant-based fiber .</p>
+      <div class="recipe-info">
+        <span>🕒 40 min</span>
+        <span>🔥 470 kcal</span>
+      </div>
+      <div class="macros">
+        <span>🍗 37g Protein</span>
+        <span>🍞 15g Carbs</span>
+        <span>🥬 19g Fat</span>
+      </div>
+    </div>
+  </div>
+  <div class="recipe-method">
+    <h4>Preparation Method</h4>
+    <ul>
+      <li> Gather all the ingredients for Chicken and Chickpea Stew</li>
+      <li>Wash and prepare all vegetables or main ingredients.</li>
+      <li>Preheat the oven, stove, or grill if needed.</li>
+      <li>. Season or marinate the main protein/vegetables for Chicken and Chickpea Stew.</li>
+     <li>Start cooking the main protein (e.g., grilling, frying, baking).</li>
+     <li> Prepare the sides or accompanying ingredients (e.g., salad, rice, etc.).</li>
+     <li>Combine all cooked and raw ingredients as needed.</li>  
+     <li>Taste and adjust seasoning (salt, pepper, herbs).</li>
+     <li> Let it rest if necessary or cool before serving.</li>
+     <li>Plate the Chicken and Chickpea Stew attractively and serve!</li>
+    </ul>
+    <button onclick="hideMethod(this)">Close</button>
+  </div>
+  </div>
+  <div class=recipe-container>
+  <div class="recipe-card" onclick="showMethod(this)">
+    <img src="1/4a20ef2cc648fa86ba02b7a1f6d8b2ae.jpg" alt="Beef and Broccoli Bowl (Low Sodium)" class="recipe-img">
+    <div class="recipe-content">
+      <h3>Beef and Broccoli Bowl (Low Sodium)</h3>
+      <p>A healthier twist on a takeout classic, great for meal prep and muscle building.</p>
+      <div class="recipe-info">
+        <span>🕒 30 min</span>
+        <span>🔥 430 kcal</span>
+      </div>
+      <div class="macros">
+        <span>🍗 36g Protein</span>
+        <span>🍞 28g Carbs</span>
+        <span>🥬 17g Fat</span>
+      </div>
+    </div>
+  </div>
+  <div class="recipe-method">
+    <h4>Preparation Method</h4>
+    <ul>
+      <li>Gather all the ingredients for Beef and Broccoli Bowl (Low Sodium)</li>
+      <li>Wash and prepare all vegetables or main ingredients.</li>
+      <li>Preheat the oven, stove, or grill if needed.</li>
+      <li> Season or marinate the main protein/vegetables for Beef and Broccoli Bowl (Low Sodium).</li>
+     <li>Start cooking the main protein (e.g., grilling, frying, baking).</li>
+     <li> Prepare the sides or accompanying ingredients (e.g., salad, rice, etc.).</li>
+     <li>Combine all cooked and raw ingredients as needed.</li>  
+     <li> Taste and adjust seasoning (salt, pepper, herbs).</li>
+     <li> Let it rest if necessary or cool before serving.</li>
+     <li>Plate the Beef and Broccoli Bowl (Low Sodium) attractively and serve .</li>
+    </ul>
+    <button onclick="hideMethod(this)">Close</button>
+  </div>
+  </div>
+ <div class=recipe-container>
+  <div class="recipe-card" onclick="showMethod(this)">
+    <img src="1/d645ad5211df4db7146e1478903514dd.jpg" class="recipe-img">
+    <div class="recipe-content">
+      <h3>Spicy Chicken and Brown Rice Meal Prep</h3>
+      <p>Perfect for weekly prep, this dish fuels your workouts with clean energy.</p>
+      <div class="recipe-info">
+        <span>🕒 35 min</span>
+        <span>🔥 480 kcal</span>
+      </div>
+      <div class="macros">
+        <span>🍗 45g Protein</span>
+        <span>🍞 40g Carbs</span>
+        <span>🥬 14g Fat</span>
+      </div>
+    </div>
+  </div>
+  <div class="recipe-method">
+    <h4>Preparation Method</h4>
+    <ul>
+      <li>Gather all the ingredients for Spicy Chicken and Brown Rice Meal Prep</li>
+      <li> Wash and prepare all vegetables or main ingredients.</li>
+      <li>Preheat the oven, stove, or grill if needed</li>
+      <li> Season or marinate the main protein/vegetables for Spicy Chicken and Brown Rice Meal Prep.</li>
+     <li>Start cooking the main protein (e.g., grilling, frying, baking)</li>
+     <li>Prepare the sides or accompanying ingredients (e.g., salad, rice, etc.).</li>
+     <li>Combine all cooked and raw ingredients as needed.</li>  
+     <li>Taste and adjust seasoning (salt, pepper, herbs).</li>
+     <li>Let it rest if necessary or cool before serving.</li>
+     <li> Plate the Spicy Chicken and Brown Rice Meal Prep attractively and serve!</li>
+    </ul>
+    <button onclick="hideMethod(this)">Close</button>
+  </div>
+  </div>
+  <div class=recipe-container>
+  <div class="recipe-card" onclick="showMethod(this)">
+    <img src="1/2f66857ed26fd336640bf23329367631.jpg" alt="Lemon Garlic Chicken with Steamed Veggies" class="recipe-img">
+    <div class="recipe-content">
+      <h3>Lemon Garlic Chicken with Steamed Veggies</h3>
+      <p>A clean, refreshing dish ideal for light dinners or clean eating plans.</p>
+      <div class="recipe-info">
+        <span>🕒 30 min</span>
+        <span>🔥 400 kcal</span>
+      </div>
+      <div class="macros">
+        <span>🍗 35g Protein</span>
+        <span>🍞 20g Carbs</span>
+        <span>🥬 15g Fat</span>
+      </div>
+    </div>
+  </div>
+  <div class="recipe-method">
+    <h4>Preparation Method</h4>
+    <ul>
+      <li>Gather all the ingredients for Lemon Garlic Chicken with Steamed Veggies</li>
+      <li> Wash and prepare all vegetables or main ingredients.</li>
+      <li> Preheat the oven, stove, or grill if needed.</li>
+      <li> Season or marinate the main protein/vegetables for Lemon Garlic Chicken with Steamed Veggies.</li>
+     <li>Start cooking the main protein (e.g., grilling, frying, baking)</li>
+     <li>Prepare the sides or accompanying ingredients (e.g., salad, rice, etc.).</li>
+     <li>Combine all cooked and raw ingredients as needed.</li>  
+     <li>Taste and adjust seasoning (salt, pepper, herbs)</li>
+     <li> Let it rest if necessary or cool before serving</li>
+     <li> Plate the Lemon Garlic Chicken with Steamed Veggies attractively and serve</li>
+    </ul>
+    <button onclick="hideMethod(this)">Close</button>
+  </div>
+  </div>
+ <div class=recipe-container>
+  <div class="recipe-card" onclick="showMethod(this)">
+    <img src="1/924d83068bce47ee45afdc46dffd9286.jpg" alt="Moroccan Spiced Beef with Couscous" class="recipe-img">
+    <div class="recipe-content">
+      <h3>Moroccan Spiced Beef with Couscous</h3>
+      <p>An exotic, protein-rich dish infused with warm spices and whole grains.</p>
+      <div class="recipe-info">
+        <span>🕒 40 min</span>
+        <span>🔥 510 kcal</span>
+      </div>
+      <div class="macros">
+        <span>🍗 39g Protein</span>
+        <span>🍞 42g Carbs</span>
+        <span>🥬 20g Fat</span>
+      </div>
+    </div>
+  </div>
+  <div class="recipe-method">
+    <h4>Preparation Method</h4>
+    <ul>
+      <li>. Gather all the ingredients for Moroccan Spiced Beef with Couscous</li>
+      <li>Wash and prepare all vegetables or main ingredients.</li>
+      <li> Preheat the oven, stove, or grill if needed.</li>
+      <li>. Season or marinate the main protein/vegetables for Moroccan Spiced Beef with Couscous.</li>
+     <li>Start cooking the main protein (e.g., grilling, frying, baking).</li>
+     <li>Prepare the sides or accompanying ingredients (e.g., salad, rice, etc.).</li>
+     <li>Combine all cooked and raw ingredients as needed.</li>  
+     <li> Taste and adjust seasoning (salt, pepper, herbs).</li>
+     <li> Let it rest if necessary or cool before serving.</li>
+     <li>Plate the Moroccan Spiced Beef with Couscous attractively and serve!</li>
+    </ul>
+    <button onclick="hideMethod(this)">Close</button>
+  </div>
+  </div>
+</div>
+</section>
+<section id="Breakfast">
+<div class=recipe-container>
+  <div class="recipe-card" onclick="showMethod(this)">
+  <img src="1/photo_2025-05-01_23-52-34.jpg" alt="Greek Yogurt with Berries and Almonds" class="recipe-img">
+  <div class="recipe-content">
+    <h3>Greek Yogurt with Berries and Almonds</h3>
+    <p>A protein-packed breakfast that’s rich in antioxidants and healthy fats.</p>
+    <div class="recipe-info">
+      <span>🕒 10 min</span>
+      <span>🔥 300 kcal</span>
+    </div>
+    <div class="macros">
+      <span>🍗 20 g Protein</span>
+      <span>🍞 25 g Carbs</span>
+      <span>🥬 12 g Fat</span>
+    </div>
+  </div>
+</div>
+<div class="recipe-method">
+    <h4>Preparation Method</h4>
+    <ul>
+      <li>Gather all the ingredients for Greek Yogurt with Berries and Almonds.</li>
+      <li> Wash and prepare all vegetables or main ingredients.</li>
+      <li>Preheat the oven, stove, or grill if needed</li>
+      <li>Season or marinate the main protein/vegetables for Greek Yogurt with Berries and Almonds.</li>
+     <li>Start cooking the main protein (e.g., grilling, frying, baking).</li>
+     <li>Prepare the sides or accompanying ingredients (e.g., salad, rice, etc.).</li>
+     <li>Combine all cooked and raw ingredients as needed.</li>  
+     <li>Taste and adjust seasoning (salt, pepper, herbs).</li>
+     <li> Let it rest if necessary or cool before serving.</li>
+     <li> Plate the Greek Yogurt with Berries and Almonds attractively and serve!</li>
+    </ul>
+    <button onclick="hideMethod(this)">Close</button>
+  </div>
+</div>
+<div class=recipe-container>
+  <div class="recipe-card" onclick="showMethod(this)">
+  <img src="1/photo_2025-05-01_23-52-36.jpg" alt="Oatmeal with Banana and Peanut Butter" class="recipe-img">
+  <div class="recipe-content">
+    <h3>Oatmeal with Banana and Peanut Butter</h3>
+    <p>A warm, energizing start to the day with fiber and sustained energy.</p>
+    <div class="recipe-info">
+      <span>🕒 10 min</span>
+      <span>🔥 380 kcal</span>
+    </div>
+    <div class="macros">
+      <span>🍗 15 g Protein</span>
+      <span>🍞 45 g Carbs</span>
+      <span>🥬 14 g Fat</span>
+    </div>
+  </div>
+</div><div class="recipe-method">
+    <h4>Preparation Method</h4>
+    <ul>
+      <li>Gather all the ingredients for Oatmeal with Banana and Peanut Butter.</li>
+      <li> Wash and prepare all vegetables or main ingredients.</li>
+      <li> Preheat the oven, stove, or grill if needed.</li>
+      <li>Season or marinate the main protein/vegetables for Oatmeal with Banana and Peanut Butter</li>
+     <li>Start cooking the main protein (e.g., grilling, frying, baking).</li>
+     <li> Prepare the sides or accompanying ingredients (e.g., salad, rice, etc.)</li>
+     <li>Combine all cooked and raw ingredients as needed.</li>  
+     <li>Taste and adjust seasoning (salt, pepper, herbs).</li>
+     <li> Let it rest if necessary or cool before serving.</li>
+     <li>Plate the Oatmeal with Banana and Peanut Butter attractively and serve</li>
+    </ul>
+    <button onclick="hideMethod(this)">Close</button>
+  </div>
+</div>
+<div class=recipe-container>
+  <div class="recipe-card" onclick="showMethod(this)">
+  <img src="1/photo_2025-05-01_23-52-39.jpg" alt="Egg White and Spinach Omelette" class="recipe-img">
+  <div class="recipe-content">
+    <h3>Egg White and Spinach Omelette</h3>
+    <p>A low-carb, high-protein breakfast perfect for muscle maintenance.</p>
+    <div class="recipe-info">
+      <span>🕒 12 min</span>
+      <span>🔥 250 kcal</span>
+    </div>
+    <div class="macros">
+      <span>🍗22 g Protein</span>
+      <span>🍞 5 g Carbs</span>
+      <span>🥬 12 g Fat</span>
+    </div>
+  </div>
+</div>
+<div class="recipe-method">
+    <h4>Preparation Method</h4>
+    <ul>
+      <li> Gather all the ingredients for Egg White and Spinach Omelette.</li>
+      <li> Wash and prepare all vegetables or main ingredients</li>
+      <li>Preheat the oven, stove, or grill if needed.</li>
+      <li> Season or marinate the main protein/vegetables for Egg White and Spinach Omelette.</li>
+     <li>Start cooking the main protein (e.g., grilling, frying, baking).</li>
+     <li> Prepare the sides or accompanying ingredients (e.g., salad, rice, etc.).</li>
+     <li> Combine all cooked and raw ingredients as needed</li>  
+     <li>Taste and adjust seasoning (salt, pepper, herbs).</li>
+     <li>Let it rest if necessary or cool before serving.</li>
+     <li>Plate the Egg White and Spinach Omelette attractively and serve</li>
+    </ul>
+    <button onclick="hideMethod(this)">Close</button>
+  </div>
+</div>
+<div class=recipe-container>
+  <div class="recipe-card" onclick="showMethod(this)">
+  <img src="1/fd4b8792e2aafa5eb3a7f2a1f0e6f520.jpg" alt="Avocado Toast with Boiled Eggs" class="recipe-img">
+  <div class="recipe-content">
+    <h3>Avocado Toast with Boiled Eggs</h3>
+    <p>A nutrient-dense meal combining healthy fats and clean protein.</p>
+    <div class="recipe-info">
+      <span>🕒 12 min</span>
+      <span>🔥 400 kcal</span>
+    </div>
+    <div class="macros">
+      <span>🍗 18 g Protein</span>
+      <span>🍞 30 g Carbs</span>
+      <span>🥬 22 g Fat</span>
+    </div>
+  </div>
+</div>
+<div class="recipe-method">
+    <h4>Preparation Method</h4>
+    <ul>
+      <li> Gather all the ingredients for Avocado Toast with Boiled Eggs</li>
+      <li>Wash and prepare all vegetables or main ingredients</li>
+      <li> Preheat the oven, stove, or grill if needed.</li>
+      <li>. Season or marinate the main protein/vegetables for Avocado Toast with Boiled Eggs.</li>
+      <li> Start cooking the main protein (e.g., grilling, frying, baking).</li>
+      <li>Prepare the sides or accompanying ingredients (e.g., salad, rice, etc.).</li>
+      <li> Combine all cooked and raw ingredients as needed.</li>  
+      <li>Taste and adjust seasoning (salt, pepper, herbs)</li>
+      <li> Let it rest if necessary or cool before serving</li>
+      <li>Plate the Avocado Toast with Boiled Eggs attractively and serve!</li>
+    </ul>
+    <button onclick="hideMethod(this)">Close</button>
+  </div>
+</div>
+<div class=recipe-container>
+  <div class="recipe-card" onclick="showMethod(this)">
+  <img src="1/photo_2025-05-01_23-52-44.jpg" alt="Cottage Cheese with Pineapple and Chia Seeds" class="recipe-img">
+  <div class="recipe-content">
+    <h3>Cottage Cheese with Pineapple and Chia Seeds</h3>
+    <p>A refreshing, protein-rich option with digestive benefits.</p>
+    <div class="recipe-info">
+      <span>🕒 5 min</span>
+      <span>🔥320 kcal</span>
+    </div>
+    <div class="macros">
+      <span>🍗 24 g Protein</span>
+      <span>🍞 20 g Carbs</span>
+      <span>🥬 14 g Fat</span>
+    </div>
+  </div>
+</div>
+<div class="recipe-method">
+    <h4>Preparation Method</h4>
+    <ul>
+      <li>Gather all the ingredients for Cottage Cheese with Pineapple and Chia Seeds</li>
+      <li>Wash and prepare all vegetables or main ingredients.</li>
+      <li> Preheat the oven, stove, or grill if needed</li>
+      <li>Season or marinate the main protein/vegetables for Cottage Cheese with Pineapple and Chia Seeds</li>
+     <li>Start cooking the main protein (e.g., grilling, frying, baking).</li>
+     <li>Prepare the sides or accompanying ingredients (e.g., salad, rice, etc.)</li>
+     <li> Combine all cooked and raw ingredients as needed.</li>  
+     <li>Taste and adjust seasoning (salt, pepper, herbs)</li>
+     <li>Let it rest if necessary or cool before serving.></li>
+     <li>Plate the Cottage Cheese with Pineapple and Chia Seeds attractively and serve</li>
+    </ul>
+    <button onclick="hideMethod(this)">Close</button>
+  </div>
+</div>
+<div class=recipe-container>
+  <div class="recipe-card" onclick="showMethod(this)">
+  <img src="1/photo_2025-05-01_23-52-46.jpg" alt="Protein Pancakes with Honey and Berries" class="recipe-img">
+  <div class="recipe-content">
+    <h3>Protein Pancakes with Honey and Berries</h3>
+    <p>A delicious way to enjoy pancakes without sacrificing your fitness goals.</p>
+    <div class="recipe-info">
+      <span>🕒 20 min</span>
+      <span>🔥420 kcal</span>
+    </div>
+    <div class="macros">
+      <span>🍗28 g Protein</span>
+      <span>🍞 35 g Carbs</span>
+      <span>🥬 18 g Fat</span>
+    </div>
+  </div>
+</div>
+<div class="recipe-method">
+    <h4>Preparation Method</h4>
+    <ul>
+      <li>Gather all the ingredients for Protein Pancakes with Honey and Berries</li>
+      <li>Wash and prepare all vegetables or main ingredients</li>
+      <li> Preheat the oven, stove, or grill if needed.</li>
+      <li>Season or marinate the main protein/vegetables for Protein Pancakes with Honey and Berries</li>
+     <li>Start cooking the main protein (e.g., grilling, frying, baking).</li>
+     <li>Prepare the sides or accompanying ingredients (e.g., salad, rice, etc.)</li>
+     <li> Combine all cooked and raw ingredients as needed</li>  
+     <li>Taste and adjust seasoning (salt, pepper, herbs)</li>
+     <li> Let it rest if necessary or cool before serving.</li>
+     <li> Plate the Protein Pancakes with Honey and Berries attractively and serve!</li>
+    </ul>
+    <button onclick="hideMethod(this)">Close</button>
+  </div>
+</div>
+<div class=recipe-container>
+  <div class="recipe-card" onclick="showMethod(this)">
+  <img src="1/photo_2025-05-01_23-52-48.jpg" alt="Tofu Scramble with Vegetables" class="recipe-img">
+  <div class="recipe-content">
+    <h3>Tofu Scramble with Vegetables</h3>
+    <p>A plant-based breakfast packed with flavor and nutrients..</p>
+    <div class="recipe-info">
+      <span>🕒 10 min</span>
+      <span>🔥350 kcal</span>
+    </div>
+    <div class="macros">
+      <span>🍗20 g Protein</span>
+      <span>🍞 15 g Carbs</span>
+      <span>🥬 18 g Fat</span>
+    </div>
+  </div>
+</div>
+<div class="recipe-method">
+    <h4>Preparation Method</h4>
+    <ul>
+      <li>Gather all the ingredients for Tofu Scramble with Vegetables.</li>
+      <li>Wash and prepare all vegetables or main ingredients</li>
+      <li> Preheat the oven, stove, or grill if needed</li>
+      <li>. Season or marinate the main protein/vegetables for Tofu Scramble with Vegetables</li>
+     <li> Start cooking the main protein (e.g., grilling, frying, baking).</li>
+     <li> Prepare the sides or accompanying ingredients (e.g., salad, rice, etc.)</li>
+     <li> Combine all cooked and raw ingredients as needed</li>  
+     <li> Taste and adjust seasoning (salt, pepper, herbs)</li>
+     <li>Let it rest if necessary or cool before serving</li>
+     <li>. Plate the Tofu Scramble with Vegetables attractively and serve</li>
+    </ul>
+    <button onclick="hideMethod(this)">Close</button>
+  </div>
+</div>
+<div class=recipe-container>
+  <div class="recipe-card" onclick="showMethod(this)">
+  <img src="1/photo_2025-05-01_23-52-51.jpg" alt="Smoothie Bowl with Protein Powder, Banana, and Granola" class="recipe-img">
+  <div class="recipe-content">
+    <h3>Smoothie Bowl with Protein Powder, Banana, and Granola</h3>
+    <p>A vibrant and energizing bowl ideal for active mornings.</p>
+    <div class="recipe-info">
+      <span>🕒 10  min</span>
+      <span>🔥450 kcal</span>
+    </div>
+    <div class="macros">
+      <span>🍗30 g Protein</span>
+      <span>🍞 40 g Carbs</span>
+      <span>🥬 16 g Fat</span>
+    </div>
+  </div>
+</div>
+<div class="recipe-method">
+    <h4>Preparation Method</h4>
+    <ul>
+      <li>Gather all the ingredients for Smoothie Bowl with Protein Powder, Banana, and Granola</li>
+      <li> Wash and prepare all vegetables or main ingredients</li>
+      <li>Preheat the oven, stove, or grill if needed</li>
+      <li>Season or marinate the main protein/vegetables for Smoothie Bowl with Protein Powder, Banana, and Granola</li>
+     <li>Start cooking the main protein (e.g., grilling, frying, baking)</li>
+     <li> Prepare the sides or accompanying ingredients (e.g., salad, rice, etc.)</li>
+     <li>Combine all cooked and raw ingredients as needed</li>  
+     <li>Taste and adjust seasoning (salt, pepper, herbs).</li>
+     <li>Let it rest if necessary or cool before serving.</li>
+     <li> Plate the Smoothie Bowl with Protein Powder, Banana, and Granola attractively and serve!</li>
+    </ul>
+    <button onclick="hideMethod(this)">Close</button>
+  </div>
+</div>
+<div class=recipe-container>
+  <div class="recipe-card" onclick="showMethod(this)">
+  <img src="1/photo_2025-05-01_23-52-57.jpg" alt="Turkey and Avocado Breakfast Wrap" class="recipe-img">
+  <div class="recipe-content">
+    <h3>Turkey and Avocado Breakfast Wrap</h3>
+    <p>A savory wrap loaded with lean protein and heart-healthy fats.</p>
+    <div class="recipe-info">
+      <span>🕒 12  min</span>
+      <span>🔥430 kcal</span>
+    </div>
+    <div class="macros">
+      <span>🍗 35 g Protein</span>
+      <span>🍞 30 g Carbs</span>
+      <span>🥬 20 g Fat</span>
+    </div>
+  </div>
+</div>
+<div class="recipe-method">
+    <h4>Preparation Method</h4>
+    <ul>
+      <li> Gather all the ingredients for Turkey and Avocado Breakfast Wrap.</li>
+      <li> Wash and prepare all vegetables or main ingredients</li>
+      <li> Preheat the oven, stove, or grill if needed.</li>
+      <li> Season or marinate the main protein/vegetables for Turkey and Avocado Breakfast Wrap</li>
+     <li> Start cooking the main protein (e.g., grilling, frying, baking)</li>
+     <li> Prepare the sides or accompanying ingredients (e.g., salad, rice, etc.)</li>
+     <li> Combine all cooked and raw ingredients as needed.</li>  
+     <li> Taste and adjust seasoning (salt, pepper, herbs).</li>
+     <li> Let it rest if necessary or cool before serving</li>
+     <li> Plate the Turkey and Avocado Breakfast Wrap attractively and serve!</li>
+    </ul>
+    <button onclick="hideMethod(this)">Close</button>
+  </div>
+</div>
+</section>
+<secion id="Shakes & Smoothies">
+  <div class=recipe-container>
+  <div class="recipe-card" onclick="showMethod(this)">
+    <img src="1/photo_2025-05-02_01-11-57.jpg" alt="Chocolate Protein Shake with Banana" class="recipe-img">
+    <div class="recipe-content">
+      <h3>Chocolate Protein Shake with Banana</h3>
+      <p>A quick and delicious shake perfect for post-workout recovery.</p>
+      <div class="recipe-info">
+        <span>🕒 5 min</span>
+        <span>🔥350 kcal</span>
+      </div>
+      <div class="macros">
+        <span>🥛30 g Protein</span>
+        <span>🍞 40 g Carbs</span>
+        <span>🥬 8 g Fat</span>
+      </div>
+    </div>
+  </div>
+  <div class="recipe-method">
+    <h4>Preparation Method</h4>
+    <ul>
+      <li> Gather all the ingredients for Chocolate Protein Shake with Banana.</li>
+      <li> Wash and prepare all vegetables or main ingredients.</li>
+      <li> Preheat the oven, stove, or grill if needed</li>
+      <li> Season or marinate the main protein/vegetables for Chocolate Protein Shake with Banana.</li>
+     <li>Start cooking the main protein (e.g., grilling, frying, baking)</li>
+     <li> Prepare the sides or accompanying ingredients (e.g., salad, rice, etc.).</li>
+     <li> Combine all cooked and raw ingredients as needed</li>  
+     <li> Taste and adjust seasoning (salt, pepper, herbs)</li>
+     <li> Let it rest if necessary or cool before serving.</li>
+     <li>Plate the Chocolate Protein Shake with Banana attractively and serve</li>
+    </ul>
+    <button onclick="hideMethod(this)">Close</button>
+  </div>
+  </div>
+  <div class=recipe-container>
+  <div class="recipe-card" onclick="showMethod(this)">
+    <img src="1/photo_2025-05-02_01-11-58.jpg" alt="Berry Protein Smoothie with Spinach" class="recipe-img">
+    <div class="recipe-content">
+      <h3>Berry Protein Smoothie with Spinach</h3>
+      <p>A nutrient-dense smoothie packed with antioxidants and protein.</p>
+      <div class="recipe-info">
+        <span>🕒 5 min</span>
+        <span>🔥300 kcal</span>
+      </div>
+      <div class="macros">
+        <span>🥛25 g Protein</span>
+        <span>🍞 30 g Carbs</span>
+        <span>🥬 10 g Fat</span>
+      </div>
+    </div>
+  </div>
+  <div class="recipe-method">
+    <h4>Preparation Method</h4>
+    <ul>
+      <li> Gather all the ingredients for Berry Protein Smoothie with Spinach</li>
+      <li> Wash and prepare all vegetables or main ingredients</li>
+      <li> Preheat the oven, stove, or grill if needed</li>
+      <li> Season or marinate the main protein/vegetables for Berry Protein Smoothie with Spinach</li>
+     <li>  Start cooking the main protein (e.g., grilling, frying, baking).</li>
+     <li> Prepare the sides or accompanying ingredients (e.g., salad, rice, etc.)</li>
+     <li> Combine all cooked and raw ingredients as needed</li>  
+     <li> Taste and adjust seasoning (salt, pepper, herbs)</li>
+     <li>Let it rest if necessary or cool before serving</li>
+     <li> Plate the Berry Protein Smoothie with Spinach attractively and serve</li>
+    </ul>
+    <button onclick="hideMethod(this)">Close</button>
+  </div>
+  </div>
+  <div class=recipe-container>
+  <div class="recipe-card" onclick="showMethod(this)">
+    <img src="1/photo_2025-05-02_01-18-06.jpg" alt="Mango Protein Smoothie with Coconut Milk" class="recipe-img">
+    <div class="recipe-content">
+      <h3>Mango Protein Smoothie with Coconut Milk</h3>
+      <p>A tropical smoothie rich in healthy fats and protein.</p>
+      <div class="recipe-info">
+        <span>🕒 5 min</span>
+        <span>🔥400 kcal</span>
+      </div>
+      <div class="macros">
+        <span>🥛28 g Protein</span>
+        <span>🍞 35 g Carbs</span>
+        <span>🥬 12 g Fat</span>
+      </div>
+    </div>
+  </div>
+  <div class="recipe-method">
+    <h4>Preparation Method</h4>
+    <ul>
+      <li>Gather all the ingredients for Mango Protein Smoothie with Coconut Milk</li>
+      <li>Wash and prepare all vegetables or main ingredients</li>
+      <li>Preheat the oven, stove, or grill if needed</li>
+      <li> Season or marinate the main protein/vegetables for Mango Protein Smoothie with Coconut Milk</li>
+     <li> Start cooking the main protein (e.g., grilling, frying, baking)</li>
+     <li> Prepare the sides or accompanying ingredients (e.g., salad, rice, etc.)</li>
+     <li>Combine all cooked and raw ingredients as needed</li>  
+     <li> Taste and adjust seasoning (salt, pepper, herbs)</li>
+     <li>Let it rest if necessary or cool before serving</li>
+     <li> Plate the Mango Protein Smoothie with Coconut Milk attractively and serve</li>
+    </ul>
+    <button onclick="hideMethod(this)">Close</button>
+  </div>
+  </div>
+  <div class=recipe-container>
+  <div class="recipe-card" onclick="showMethod(this)">
+    <img src="1/photo_2025-05-02_01-12-00.jpg" alt="Peanut Butter Banana Protein Shake" class="recipe-img">
+    <div class="recipe-content">
+      <h3>Peanut Butter Banana Protein Shake</h3>
+      <p>A creamy shake that’s perfect for muscle recovery and energy.</p>
+      <div class="recipe-info">
+        <span>🕒 5 min</span>
+        <span>🔥450 kcal</span>
+      </div>
+      <div class="macros">
+        <span>🥛 35 g Protein</span>
+        <span>🍞 50 g Carbs</span>
+        <span>🥬 15 g Fat</span>
+      </div>
+    </div>
+  </div>
+  <div class="recipe-method">
+    <h4>Preparation Method</h4>
+    <ul>
+      <li>1. Gather all the ingredients for Peanut Butter Banana Protein Shake</li>
+      <li> 2. Wash and prepare all vegetables or main ingredients</li>
+      <li> 3. Preheat the oven, stove, or grill if needed.</li>
+      <li>4. Season or marinate the main protein/vegetables for Peanut Butter Banana Protein Shake</li>
+     <li> Start cooking the main protein (e.g., grilling, frying, baking)</li>
+     <li> Prepare the sides or accompanying ingredients (e.g., salad, rice, etc.)</li>
+     <li>. Combine all cooked and raw ingredients as needed</li>  
+     <li>Taste and adjust seasoning (salt, pepper, herbs)</li>
+     <li>Taste and adjust seasoning (salt, pepper, herbs)</li>
+     <li> Plate the Peanut Butter Banana Protein Shake attractively and serve</li>
+    </ul>
+    <button onclick="hideMethod(this)">Close</button>
+  </div>
+  </div>
+  <div class=recipe-container>
+  <div class="recipe-card" onclick="showMethod(this)">
+    <img src="1/photo_2025-05-02_01-12-01.jpg" alt="Green Protein Smoothie with Kale and Avocado" class="recipe-img">
+    <div class="recipe-content">
+      <h3>Green Protein Smoothie with Kale and Avocado</h3>
+      <p>A refreshing smoothie loaded with greens and healthy fats.</p>
+      <div class="recipe-info">
+        <span>🕒 5 min</span>
+        <span>🔥350 kcal</span>
+      </div>
+      <div class="macros">
+        <span>🥛 30 g Protein</span>
+        <span>🍞 25 g Carbs</span>
+        <span>🥬 12 g Fat</span>
+      </div>
+    </div>
+  </div>
+  <div class="recipe-method">
+    <h4>Preparation Method</h4>
+    <ul>
+      <li>Gather all the ingredients for Green Protein Smoothie with Kale and Avocado.</li>
+      <li> Wash and prepare all vegetables or main ingredients</li>
+      <li> Preheat the oven, stove, or grill if needed.</li>
+      <li> Season or marinate the main protein/vegetables for Green Protein Smoothie with Kale and Avocado</li>
+     <li>Start cooking the main protein (e.g., grilling, frying, baking)</li>
+     <li> Prepare the sides or accompanying ingredients (e.g., salad, rice, etc.)</li>
+     <li>Combine all cooked and raw ingredients as needed</li>  
+     <li>Taste and adjust seasoning (salt, pepper, herbs)</li>
+     <li> Let it rest if necessary or cool before serving.</li>
+     <li> Plate the Green Protein Smoothie with Kale and Avocado attractively and serve</li>
+    </ul>
+    <button onclick="hideMethod(this)">Close</button>
+  </div>
+  </div>
+  <div class=recipe-container>
+  <div class="recipe-card" onclick="showMethod(this)">
+    <img src="1/photo_2025-05-02_01-12-02.jpg" alt="Vanilla Almond Protein Shake" class="recipe-img">
+    <div class="recipe-content">
+      <h3>Vanilla Almond Protein Shake</h3>
+      <p>A creamy shake with a hint of vanilla and healthy fats from almonds.</p>
+      <div class="recipe-info">
+        <span>🕒 5 min</span>
+        <span>🔥380 kcal</span>
+      </div>
+      <div class="macros">
+        <span>🥛 32 g Protein</span>
+        <span>🍞 30 g Carbs</span>
+        <span>🥬 10 g Fat</span>
+      </div>
+    </div>
+  </div>
+  <div class="recipe-method">
+    <h4>Preparation Method</h4>
+    <ul>
+      <li> Gather all the ingredients for Vanilla Almond Protein Shake</li>
+      <li> Wash and prepare all vegetables or main ingredients</li>
+      <li> Preheat the oven, stove, or grill if needed.</li>
+      <li>Season or marinate the main protein/vegetables for Vanilla Almond Protein Shake</li>
+     <li>Start cooking the main protein (e.g., grilling, frying, baking)</li>
+     <li> Prepare the sides or accompanying ingredients (e.g., salad, rice, etc.)</li>
+     <li> Combine all cooked and raw ingredients as needed.</li>  
+     <li> Taste and adjust seasoning (salt, pepper, herbs).</li>
+     <li> Let it rest if necessary or cool before serving</li>
+     <li> Plate the Vanilla Almond Protein Shake attractively and serve</li>
+    </ul>
+    <button onclick="hideMethod(this)">Close</button>
+  </div>
+  </div>
+  </secion>
+  <section id="Low Carb">
+    <div class=recipe-container>
+  <div class="recipe-card" onclick="showMethod(this)">
+      <img src="1/photo_2025-05-02_01-48-34.jpg" alt="Cauliflower Fried Rice with Shrimp" class="recipe-img">
+      <div class="recipe-content">
+        <h3>Cauliflower Fried Rice with Shrimp</h3>
+        <p>A low-carb, high-protein dish that’s quick and easy to make.</p>
+        <div class="recipe-info">
+          <span>🕒 15 min</span>
+          <span>🔥400 kcal</span>
+        </div>
+        <div class="macros">
+          <span>🥛 28 g Protein</span>
+          <span>🍞 20 g Carbs</span>
+          <span>🥬 14 g Fat</span>
+        </div>
+      </div>
+    </div>
+    <div class="recipe-method">
+    <h4>Preparation Method</h4>
+    <ul>
+      <li> Gather all the ingredients for Cauliflower Fried Rice with Shrimp</li>
+      <li>  Wash and prepare all vegetables or main ingredients.</li>
+      <li> Preheat the oven, stove, or grill if needed</li>
+      <li> Season or marinate the main protein/vegetables for Cauliflower Fried Rice with Shrimp</li>
+     <li> Start cooking the main protein (e.g., grilling, frying, baking).</li>
+     <li> Prepare the sides or accompanying ingredients (e.g., salad, rice, etc.)</li>
+     <li>Combine all cooked and raw ingredients as needed</li>  
+     <li> Taste and adjust seasoning (salt, pepper, herbs).</li>
+     <li> Let it rest if necessary or cool before serving</li>
+     <li> Plate the Cauliflower Fried Rice with Shrimp attractively and serve!</li>
+    </ul>
+    <button onclick="hideMethod(this)">Close</button>
+  </div>
+    </div>
+   <div class=recipe-container>
+  <div class="recipe-card" onclick="showMethod(this)">
+      <img src="1/photo_2025-05-02_01-45-48.jpg" alt="Eggplant Lasagna with Ground Turkey" class="recipe-img">
+      <div class="recipe-content">
+        <h3>Eggplant Lasagna with Ground Turkey</h3>
+        <p>A low-carb lasagna alternative that’s rich in protein and flavor.</p>
+        <div class="recipe-info">
+          <span>🕒 40 min</span>
+          <span>🔥450 kcal</span>
+        </div>
+        <div class="macros">
+          <span>🥛 35 g Protein</span>
+          <span>🍞 25 g Carbs</span>
+          <span>🥬 20 g Fat</span>
+        </div>
+      </div>
+    </div>
+    <div class="recipe-method">
+    <h4>Preparation Method</h4>
+    <ul>
+      <li> Gather all the ingredients for Eggplant Lasagna with Ground Türkiye</li>
+      <li>Wash and prepare all vegetables or main ingredients</li>
+      <li>Preheat the oven, stove, or grill if needed</li>
+      <li>Season or marinate the main protein/vegetables for Eggplant Lasagna with Ground Türkiye</li>
+     <li> Start cooking the main protein (e.g., grilling, frying, baking).</li>
+     <li> Prepare the sides or accompanying ingredients (e.g., salad, rice, etc.)</li>
+     <li>Combine all cooked and raw ingredients as needed.</li>  
+     <li> Taste and adjust seasoning (salt, pepper, herbs)</li>
+     <li> Let it rest if necessary or cool before serving</li>
+     <li> Plate the Eggplant Lasagna with Ground Türkiye attractively and serve</li>
+    </ul>
+    <button onclick="hideMethod(this)">Close</button>
+  </div>
+    </div>
+    <div class=recipe-container>
+  <div class="recipe-card" onclick="showMethod(this)">
+      <img src="1/photo_2025-05-02_01-45-49.jpg" alt="Zucchini and Cheese Frittata" class="recipe-img">
+      <div class="recipe-content">
+        <h3>Zucchini and Cheese Frittata</h3>
+        <p>A low-carb breakfast option that’s high in protein and flavor.</p>
+        <div class="recipe-info">
+          <span>🕒 25 min</span>
+          <span>🔥300 kcal</span>
+        </div>
+        <div class="macros">
+          <span>🥛 25 g Protein</span>
+          <span>🍞 10 g Carbs</span>
+          <span>🥬 15 g Fat</span>
+        </div>
+      </div>
+    </div>
+    <div class="recipe-method">
+    <h4>Preparation Method</h4>
+    <ul>
+      <li> Gather all the ingredients for Zucchini and Cheese Frittata.</li>
+      <li> Wash and prepare all vegetables or main ingredients.</li>
+      <li> Preheat the oven, stove, or grill if needed.</li>
+      <li> Season or marinate the main protein/vegetables for Zucchini and Cheese Frittata.</li>
+     <li> Start cooking the main protein (e.g., grilling, frying, baking)</li>
+     <li> Prepare the sides or accompanying ingredients (e.g., salad, rice, etc.).</li>
+     <li> Combine all cooked and raw ingredients as needed.</li>  
+     <li>Taste and adjust seasoning (salt, pepper, herbs)</li>
+     <li> Let it rest if necessary or cool before serving</li>
+     <li>Plate the Zucchini and Cheese Frittata attractively and serve</li>
+    </ul>
+    <button onclick="hideMethod(this)">Close</button>
+  </div>
+    </div>
+    <div class=recipe-container>
+  <div class="recipe-card" onclick="showMethod(this)">
+      <img src="1/photo_2025-05-02_01-45-50.jpg" alt="Salmon and Asparagus Foil Packets" class="recipe-img">
+      <div class="recipe-content">
+        <h3>Salmon and Asparagus Foil Packets</h3>
+        <p>A healthy, low-carb meal that’s easy to prepare and packed with protein.</p>
+        <div class="recipe-info">
+          <span>🕒 30 min</span>
+          <span>🔥450 kcal</span>
+        </div>
+        <div class="macros">
+          <span>🥛 40 g Protein</span>
+          <span>🍞 20 g Carbs</span>
+          <span>🥬 22 g Fat</span>
+        </div>
+      </div>
+    </div>
+    <div class="recipe-method">
+    <h4>Preparation Method</h4>
+    <ul>
+      <li> Gather all the ingredients for Salmon and Asparagus Foil Packets.</li>
+      <li> Wash and prepare all vegetables or main ingredients.</li>
+      <li> Preheat the oven, stove, or grill if needed</li>
+      <li> Season or marinate the main protein/vegetables for Salmon and Asparagus Foil Packets</li>
+     <li> Start cooking the main protein (e.g., grilling, frying, baking)</li>
+     <li> Prepare the sides or accompanying ingredients (e.g., salad, rice, etc.)</li>
+     <li> Combine all cooked and raw ingredients as needed</li>  
+     <li> Taste and adjust seasoning (salt, pepper, herbs)</li>
+     <li>Let it rest if necessary or cool before serving</li>
+     <li>Plate the Salmon and Asparagus Foil Packets attractively and serve</li>
+    </ul>
+    <button onclick="hideMethod(this)">Close</button>
+  </div>
+    </div>
+    </section>
+    <section id="Salad">
+      <div class=recipe-container>
+  <div class="recipe-card" onclick="showMethod(this)">
+        <img src="1/photo_2025-05-02_02-24-00.jpg" alt="Quinoa Salad with Chickpeas and Avocado" class="recipe-img">
+        <div class="recipe-content">
+          <h3>Quinoa Salad with Chickpeas and Avocado</h3>
+          <p>A protein-packed salad that’s perfect for meal prep.</p>
+          <div class="recipe-info">
+            <span>🕒 20 min</span>
+            <span>🔥350 kcal</span>
+          </div>
+          <div class="macros">
+            <span>🥛 15 g Protein</span>
+            <span>🍞 40 g Carbs</span>
+            <span>🥬 10 g Fat</span>
+          </div>
+        </div>
+      </div>
+      <div class="recipe-method">
+    <h4>Preparation Method</h4>
+    <ul>
+      <li> Gather all the ingredients for Quinoa Salad with Chickpeas and Avocado</li>
+      <li>Wash and prepare all vegetables or main ingredients</li>
+      <li>Preheat the oven, stove, or grill if needed</li>
+      <li> Season or marinate the main protein/vegetables for Quinoa Salad with Chickpeas and Avocado</li>
+     <li> Start cooking the main protein (e.g., grilling, frying, baking).</li>
+     <li> Prepare the sides or accompanying ingredients (e.g., salad, rice, etc.).</li>
+     <li> Combine all cooked and raw ingredients as needed.</li>  
+     <li> Taste and adjust seasoning (salt, pepper, herbs)</li>
+     <li> Let it rest if necessary or cool before serving.</li>
+     <li> Plate the Quinoa Salad with Chickpeas and Avocado attractively and serve</li>
+    </ul>
+    <button onclick="hideMethod(this)">Close</button>
+  </div>
+      </div>
+      <div class=recipe-container>
+  <div class="recipe-card" onclick="showMethod(this)">
+        <img src="1/photo_2025-05-02_02-24-03.jpg" alt="Greek Salad with Feta and Olives" class="recipe-img">
+        <div class="recipe-content">
+          <h3>Greek Salad with Feta and Olives</h3>
+          <p>A refreshing salad loaded with healthy fats and protein.</p>
+          <div class="recipe-info">
+            <span>🕒 10 min</span>
+            <span>🔥250 kcal</span>
+          </div>
+          <div class="macros">
+            <span>🥛 12 g Protein</span>
+            <span>🍞 15 g Carbs</span>
+            <span>🥬 18 g Fat</span>
+          </div>
+        </div>
+      </div>
+      <div class="recipe-method">
+    <h4>Preparation Method</h4>
+    <ul>
+      <li> Gather all the ingredients for Greek Salad with Feta and Olives</li>
+      <li> Wash and prepare all vegetables or main ingredients.</li>
+      <li >Preheat the oven, stove, or grill if needed.</li>
+      <li>  Season or marinate the main protein/vegetables for Greek Salad with Feta and Olives</li>
+     <li> Start cooking the main protein (e.g., grilling, frying, baking)</li>
+     <li> Prepare the sides or accompanying ingredients (e.g., salad, rice, etc.)</li>
+     <li>  Combine all cooked and raw ingredients as needed.</li>  
+     <li> Taste and adjust seasoning (salt, pepper, herbs).</li>
+     <li>Let it rest if necessary or cool before serving.</li>
+     <li>Plate the Greek Salad with Feta and Olives attractively and serve</li>
+    </ul>
+    <button onclick="hideMethod(this)">Close</button>
+  </div>
+      </div>
+      <!-- Add more salad recipes here -->
+      <div class=recipe-container>
+  <div class="recipe-card" onclick="showMethod(this)">
+        <img src="1/photo_2025-05-02_02-27-46.jpg" alt="Spinach Salad with Grilled Chicken" class="recipe-img">
+        <div class="recipe-content">
+          <h3>Spinach Salad with Grilled Chicken</h3>
+          <p>A protein-rich salad that’s perfect for a light lunch or dinner.</p>
+          <div class="recipe-info">
+            <span>🕒 15 min</span>
+            <span>🔥300 kcal</span>
+          </div>
+          <div class="macros">
+            <span>🥛 30 g Protein</span>
+            <span>🍞 20 g Carbs</span>
+            <span>🥬 12 g Fat</span>
+          </div>
+        </div>
+      </div>
+      <div class="recipe-method">
+    <h4>Preparation Method</h4>
+    <ul>
+      <li>Gather all the ingredients for Spinach Salad with Grilled Chicken</li>
+      <li> Wash and prepare all vegetables or main ingredients</li>
+      <li> Preheat the oven, stove, or grill if needed.</li>
+      <li> Season or marinate the main protein/vegetables for Spinach Salad with Grilled Chicken.</li>
+     <li> Start cooking the main protein (e.g., grilling, frying, baking)</li>
+     <li>  Prepare the sides or accompanying ingredients (e.g., salad, rice, etc.)</li>
+     <li>  Combine all cooked and raw ingredients as needed</li>  
+     <li> Taste and adjust seasoning (salt, pepper, herbs).</li>
+     <li> Let it rest if necessary or cool before serving</li>
+     <li> Plate the Spinach Salad with Grilled Chicken attractively and serve</li>
+    </ul>
+    <button onclick="hideMethod(this)">Close</button>
+  </div>
+      </div>
+      <div class=recipe-container>
+  <div class="recipe-card" onclick="showMethod(this)">
+        <img src="1/photo_2025-05-02_02-24-07.jpg" alt="Cabbage Salad with Tuna" class="recipe-img">
+        <div class="recipe-content">
+          <h3>Cabbage Salad with Tuna</h3>
+          <p>A low-carb salad that’s high in protein and flavor.</p>
+          <div class="recipe-info">
+            <span>🕒 10 min</span>
+            <span>🔥280 kcal</span>
+          </div>
+          <div class="macros">
+            <span>🥛 25 g Protein</span>
+            <span>🍞 15 g Carbs</span>
+            <span>🥬 14 g Fat</span>
+          </div>
+        </div>
+      </div>
+      <div class="recipe-method">
+    <h4>Preparation Method</h4>
+    <ul>
+      <li> Gather all the ingredients for Cabbage Salad with Tuna</li>
+      <li> Wash and prepare all vegetables or main ingredients.</li>
+      <li>3. Preheat the oven, stove, or grill if needed</li>
+      <li>. Season or marinate the main protein/vegetables for Cabbage Salad with Tuna</li>
+     <li>Start cooking the main protein (e.g., grilling, frying, baking).</li>
+     <li>. Prepare the sides or accompanying ingredients (e.g., salad, rice, etc.).</li>
+     <li>. Combine all cooked and raw ingredients as needed.</li>  
+     <li>Taste and adjust seasoning (salt, pepper, herbs).</li>
+     <li>Let it rest if necessary or cool before serving.</li>
+     <li>. Plate the Cabbage Salad with Tuna attractively and serve</li>
+    </ul>
+    <button onclick="hideMethod(this)">Close</button>
+  </div>
+      </div>
+      <div class=recipe-container>
+  <div class="recipe-card" onclick="showMethod(this)">
+    <img src="1/8a1ba5d7ba85dda6b6e80be30a53b5c8.jpg" alt="Grilled Chicken & Avocado Salad" class="recipe-img">
+    <div class="recipe-content">
+      <h3>Grilled Chicken & Avocado Salad</h3>
+      <p>A satisfying, protein-packed salad with grilled chicken, creamy avocado, and crisp vegetables.</p>
+      <div class="recipe-info">
+        <span>🕒 20 min</span>
+        <span>🔥 450 kcal</span>
+      </div>
+      <div class="macros">
+        <span>🍗 40g Protein</span>
+        <span>🍞 25g Carbs</span>
+        <span>🥬 22g Fat</span>
+      </div>
+    </div>
+  </div>
+ <div class="recipe-method">
+    <h4>Preparation Method</h4>
+    <ul>
+      <li>Gather all the ingredients for Grilled Chicken & Avocado Salad</li>
+      <li>Wash and prepare the vegetables (lettuce, tomatoes, avocado, onion).</li>
+      <li>Preheat the grill or grill pan over medium heat.</li>
+      <li>Season or marinate the chicken breast with olive oil, lemon juice, garlic, salt, and pepper</li>
+     <li>Grill the chicken for about 6–7 minutes on each side until fully cooked</li>
+     <li>While the chicken cooks, slice the avocado, chop the tomatoes, and thinly slice the onion</li>
+     <li>In a bowl, layer the greens, avocado, tomato, and onion.</li>  
+     <li>Slice the grilled chicken and add it on top of the salad .</li>
+     <li>Drizzle with a simple dressing (olive oil + lemon juice + salt & pepper).</li>
+     <li>Plate the Grilled Chicken & Avocado Salad attractively and serve!</li>
+    </ul>
+    <button onclick="hideMethod(this)">Close</button>
+  </div>
+  </div>
+</div>
+<script>
+  function showMethod(card) {
+    const container = card.parentElement;
+    const methodBox = container.querySelector('.recipe-method');
+    methodBox.style.display = 'block';
+  }
+
+  function hideMethod(button) {
+    const methodBox = button.parentElement;
+    methodBox.style.display = 'none';
+  }
+</script>
+
+
+
+      <a href="#nav-bar" class="back-to-top">↑</a>
+      <script>
+  document.querySelector('.back-to-top').addEventListener('click', function(e) {
+    e.preventDefault();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+</script>
+<script>
+document.getElementById("calorie-form").addEventListener("submit", function (e) {
+  e.preventDefault();
+
+  const gender = document.getElementById("gender").value;
+  const age = Number(document.getElementById("age").value);
+  const height = Number(document.getElementById("height").value);
+  const weight = Number(document.getElementById("weight").value);
+  const activity = Number(document.getElementById("activity").value);
+  const result = document.getElementById("result");
+
+  if (!age || !height || !weight || !activity) {
+      result.textContent = "Please fill out all fields.";
+      result.style.color = "red";
+      return;
+  }
+
+  let bmr;
+  if (gender === "male") {
+      bmr = 10 * weight + 6.25 * height - 5 * age + 5;
+  } else {
+      bmr = 10 * weight + 6.25 * height - 5 * age - 161;
+  }
+
+  const calories = Math.round(bmr * activity);
+
+  result.textContent = `You need about ${calories} calories/day.`;
+  result.style.color = "white";
+});
+</script>
+
+</body>
+</section>
+</html>

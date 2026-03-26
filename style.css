@@ -1,0 +1,354 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+body {
+  background: url('pho3.png.jpg') no-repeat center center fixed;
+  background-size: cover;
+  color: #fff;
+}
+
+/* Header */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 10%;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.logo {
+  
+  display: none;
+}
+
+.menu-btn {
+  
+  display: none;
+  font-size: 26px;
+  background: transparent;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+
+nav {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  flex: 1;
+  margin-left: 20px;
+}
+
+.nav-btn {
+  padding: 10px 18px;
+  background-color: rgba(18, 100, 45, 0.7);
+
+  border: none;
+  border-radius: 20px;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+    text-decoration: none; /* ينحي التسطير */
+    color: inherit; /* يخلي اللون منسجم مع السياق */
+  }
+  
+
+
+.nav-btn:hover {
+
+  background-color: #12642d;
+  transform: scale(1.05);
+}
+
+/* Main Content */
+main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 60px 10%;
+}
+
+.content {
+  max-width: 600px;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 40px;
+  border-radius: 20px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+  backdrop-filter: blur(4px);
+}
+@media (max-width: 600px) {
+  html, body {
+    width: 100%;
+    overflow-x: hidden;
+  }
+
+  main {
+    flex-direction: column;
+    padding: 30px 5%;
+  }
+
+  .content {
+    width: 100%;
+    padding: 20px;
+    text-align: center;
+  }
+
+  .buttons {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .btn, .btn-outline {
+    width: 100%;
+    max-width: 300px;
+  }
+
+  .toggle-container {
+    position: static;
+    margin: 20px auto;
+    transform: none;
+  }
+
+  .mode-toggle-btn {
+    position: static;
+    margin: 10px auto;
+    display: block;
+  }
+
+  nav.active {
+    position: absolute;
+    top: 60px;
+    right: 10px;
+    background: rgba(0, 128, 0, 0.95);
+    padding: 10px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+
+.content h1 {
+  font-size: 50px;
+  margin-bottom: 20px;
+  color: #020100;
+}
+
+.content h1 span {
+  color: #00ff88;
+}
+
+.content p {
+  font-size: 20px;
+  margin-bottom: 30px;
+  line-height: 1.3;
+  color: #000000;
+}
+
+/* Buttons */
+.buttons {
+  display: flex;
+  gap: 15px;
+}
+
+.btn, .btn-outline {
+  padding: 12px 24px;
+  border-radius: 30px;
+  font-weight: bold;
+  text-decoration: none;
+  transition: transform 0.3s ease, background-color 0.3s, color 0.3s;
+}
+
+.btn {
+  
+    background-color: #12642d;
+    color: white;
+ 
+}
+
+.btn-outline {
+  border: 2px solid #12642d;
+  color: #12642d;
+  background-color: transparent;
+}
+
+
+.btn:hover, .btn-outline:hover {
+  transform: scale(1.1);
+  background-color: #12642d;
+
+  color: white;
+}
+
+/* WiSport Tag */
+.wisport-tag {
+  font-size: 18px;
+  color: #149957;
+  text-align: right;
+  margin-top: 8px;
+  width: 100%;
+  max-width: 600px;
+  font-weight: 600;
+}
+
+/* Footer */
+footer {
+  padding: 20px 10%;
+  text-align: center;
+  background: rgba(230, 255, 230, 0.9);
+  margin-top: 40px;
+  box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1);
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+}
+
+.socials a img {
+  width: 30px;
+  margin: 0 10px;
+  transition: transform 0.3s;
+}
+
+.socials a img:hover {
+  transform: scale(1.2);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  nav {
+    display: none;
+    flex-direction: column;
+    background: rgba(0, 128, 0, 0.95);
+    padding: 10px;
+    border-radius: 10px;
+    position: absolute;
+    top: 70px;
+    right: 10%;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+  }
+
+  nav.active {
+    display: flex;
+  }
+
+  .menu-btn {
+    display: block;
+  }
+
+  .nav-btn {
+    width: 150px;
+    text-align: center;
+  }
+}
+.toggle-switch {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 30px auto;
+  background-color: #ccc;
+  border-radius: 30px;
+  overflow: hidden;
+  width: 220px;
+  height: 45px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+.toggle-btn {
+  flex: 1;
+  padding: 10px;
+  background-color: white;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  font-weight: bold;
+  color: #333;
+  transition: background-color 0.3s, color 0.3s;
+  border-radius: 30px;
+}
+
+.toggle-btn.active {
+  background-color: green;
+  color: white;
+}
+.toggle-container {
+  display: flex;
+  background-color: #d9f0dc;
+  border-radius: 50px;
+  width: 150px; /* حجم أصغر من المعتاد */
+  margin: 20px auto;
+  padding: 3px;
+  position: relative;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+
+  position: absolute;
+  right: 20px; /* أو left: 20px للإزاحة لليسار */
+  top: 15px;
+  transform: translateY(-20px); /* يرفع العنصر 10px للأعلى */
+}
+.switch-btn {
+  flex: 1;
+  padding: 5px 0;
+  border: none;
+  border-radius: 50px;
+  font-weight: bold;
+  font-size: 13px;
+  background-color: transparent;
+  color: #333;
+  cursor: pointer;
+  transition: 0.3s ease;
+  z-index: 1;
+  position: relative;
+  text-decoration: none;
+  padding: 7px 7px; 
+}
+.switch-btn.active {
+  background-color: #2a9d53;
+  color: white;
+}
+/* زر الوضع الليلي والنهاري */
+.mode-toggle-btn {
+  position: absolute;
+  top: 15px;
+  left: 20px; /* بدلاً من right */
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: #333;
+  z-index: 1001;
+  transition: color 0.3s;
+}
+
+
+/* الوضع الليلي */
+body.dark-mode {
+  background-color: #95964d !important;
+  color: #eee;
+}
+
+body.dark-mode header,
+body.dark-mode .content,
+body.dark-mode footer {
+  background-color: rgba(230, 177, 63, 0.63) !important;
+  color: white !important;
+}
+
+body.dark-mode .nav-btn,
+body.dark-mode .btn,
+body.dark-mode .btn-outline,
+body.dark-mode .switch-btn {
+  background-color: #136937 !important;
+  color: white !important;
+}
+
+

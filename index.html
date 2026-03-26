@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sport Website</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <header>
+    <div class="logo"></div>
+    
+    <nav id="nav">
+      <a href="index.html" class="nav-btn">Home</a>
+      <a href="calorie.html" class="nav-btn">Calorie Calculator</a>
+      <a href="workout.html" class="nav-btn">Home Workouts</a>
+      <a href="11.html" class="nav-btn">Healthy Tips</a>
+    </nav>
+    
+
+    <div class="toggle-container">
+      <a href="signup.php" id="signupBtn" class="switch-btn active">Sign Up</a>
+      <a href="login.php" id="loginBtn" class="switch-btn">Log in</a>
+    </div>
+
+    <!-- زر الوضع النهاري/الليلي -->
+    <button id="mode-toggle" class="mode-toggle-btn">🌙</button>
+  </header>
+
+  <main>
+    <div class="content">
+      <h1>Practice Sports<br><span>Live Healthy!</span></h1>
+      <p>
+        Exercise regularly and eat healthy to live a life full of energy and vitality.
+        Start with simple steps toward a balanced and healthy lifestyle!         
+      </p>
+      <div class="buttons">
+        <a href="calorie.html" class="btn">Calorie Calculator</a>
+        <a href="whysport.html" class="btn-outline">why sport ! </a>
+        
+      </div>
+      
+      
+  </main>
+
+  <footer>
+    <div class="socials">
+      <a href=""><img src="facebook-icon.png" alt="Facebook" /></a>
+      <a href=""><img src="instagram-icon.png" alt="Instagram" /></a>
+      <a href="#"><img src="linkedin-icon.png" alt="LinkedIn" /></a>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const signupBtn = document.getElementById("signupBtn");
+      const loginBtn = document.getElementById("loginBtn");
+      const modeToggle = document.getElementById("mode-toggle");
+  
+      // استرجاع الوضع المحفوظ من localStorage
+      const savedMode = localStorage.getItem("mode");
+      if (savedMode === "dark") {
+        document.body.classList.add("dark-mode");
+        modeToggle.textContent = "☀️";
+      } else {
+        modeToggle.textContent = "🌙";
+      }
+  
+      // عند الضغط على زر التبديل
+      modeToggle.addEventListener("click", () => {
+        const isDark = document.body.classList.toggle("dark-mode");
+        // تحديث النص
+        modeToggle.textContent = isDark ? "☀️" : "🌙";
+        // حفظ الوضع في localStorage
+        localStorage.setItem("mode", isDark ? "dark" : "light");
+      });
+  
+      // تسجيل وتسجيل الدخول
+      signupBtn.addEventListener("click", () => {
+        signupBtn.classList.add("active");
+        loginBtn.classList.remove("active");
+      });
+  
+      loginBtn.addEventListener("click", () => {
+        loginBtn.classList.add("active");
+        signupBtn.classList.remove("active");
+      });
+    });
+  </script>
+  
+
+</body>
+</html>

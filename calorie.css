@@ -1,0 +1,392 @@
+/* Style pour la barre défilante */
+.scrolling-banner {
+    background-color: #0c5c20;
+    color: white;
+    padding: 10px 20px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    font-size: 1.2rem;
+    white-space: nowrap;
+    animation: scroll 15s linear infinite;
+}
+
+.scrolling-banner p {
+    display: inline;
+    margin: 0;
+}
+
+/* Style de la bannière défilante */
+.marquee {
+    overflow: hidden;
+    width: 100vw;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #0c5c20;
+    padding: 10px 0;
+    z-index: 9999;
+}
+
+.marquee span {
+    display: inline-block;
+    white-space: nowrap;
+    font-size: 1.5rem;
+    color: white;
+    animation: scroll-right 15s linear infinite;
+}
+
+@keyframes scroll-right {
+    0% {
+        transform: translateX(100%);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
+}
+
+/* Lien "Learn more" en bas à droite */
+.learn-more {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #0c5c20;
+    color: #ffffff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 1rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.learn-more:hover {
+    background-color: #177447;
+    color: white;
+}
+
+.Return {
+  color: black; /* Couleur noire */
+  text-decoration: none; /* Enlever la ligne sous le lien */
+}
+
+.Return:hover {
+  text-decoration: underline; /* Ajouter une ligne sous le texte quand on survole */
+}
+
+/* Style global */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    min-height: 100vh;
+  padding-bottom: 60px; /* pour laisser de la place au lien fixé */
+}
+
+
+h1 {
+    text-align: center;
+    font-size: 2rem;
+    color: #000000;
+    margin-top: 50px;
+    margin-bottom: 30px;
+}
+h3 {
+  margin-top: 60px; /* ou ajuste selon la hauteur de ta barre défilante */
+  text-align: center; /* optionnel : pour centrer le texte */
+  color: #0b0b0b; /* ou la couleur que tu veux */
+}
+h4 {
+  margin-top: 70;
+  color: #0b0b0b;
+}
+/* Formulaire réduit */
+form {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+label {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+    display: block;
+    color: #000000;
+}
+
+input,
+select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+    color: #0c5c20;
+}
+
+input[type="number"],
+select {
+    cursor: pointer;
+}
+
+button {
+    background-color: #0c5c20;
+    color: white;
+    font-size: 1.1rem;
+    padding: 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #107b2b;
+}
+
+/* Résultats réduits */
+.results {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 16px;
+    width: 100%;
+    max-width: 400px;
+    margin: 20px auto;
+    display: none;
+}
+
+.results h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+.results p {
+    font-size: 1rem;
+    margin: 10px 0;
+}
+
+#calories, #protein, #carbs, #fat {
+    font-weight: bold;
+    color: #096f3e;
+}
+
+/* Media Queries pour les petits écrans (téléphones) */
+@media (max-width: 600px) {
+    h1 {
+        font-size: 1.5rem;
+    }
+
+    form {
+        padding: 20px;
+        max-width: 100%;
+    }
+
+    label {
+        font-size: 0.9rem;
+    }
+
+    input,
+    select {
+        font-size: 0.9rem;
+        padding: 8px;
+    }
+
+    button {
+        font-size: 1rem;
+        padding: 10px;
+    }
+
+    .results h2 {
+        font-size: 1.2rem;
+    }
+
+    .results p {
+        font-size: 0.9rem;
+    }
+}
+
+/* Media Queries pour les grands écrans */
+@media (min-width: 1024px) {
+    form {
+        max-width: 600px;
+        padding: 30px;
+    }
+
+    .results {
+        max-width: 600px;
+        padding: 24px;
+    }
+
+    h1 {
+        font-size: 2.5rem;
+    }
+
+    label {
+        font-size: 1.1rem;
+    }
+
+    input,
+    select {
+        font-size: 1.1rem;
+        padding: 12px;
+    }
+
+    button {
+        font-size: 1.2rem;
+        padding: 14px;
+    }
+
+    .results h2 {
+        font-size: 1.4rem;
+    }
+
+    .results p {
+        font-size: 1.1rem;
+    }
+}
+
+/* Media Queries pour les très grands écrans */
+@media (min-width: 1440px) {
+    form {
+        max-width: 700px;
+        padding: 36px;
+    }
+
+    .results {
+        max-width: 700px;
+        padding: 28px;
+    }
+
+    h1 {
+        font-size: 3rem;
+    }
+
+    label {
+        font-size: 1.2rem;
+    }
+
+    input,
+    select {
+        font-size: 1.2rem;
+        padding: 14px;
+    }
+
+    button {
+        font-size: 1.3rem;
+        padding: 16px;
+    }
+
+    .results h2 {
+        font-size: 1.6rem;
+    }
+
+    .results p {
+        font-size: 1.2rem;
+    }
+}
+/*learn more page--------------------------------->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>*/
+/* === STYLE GLOBAL DE LA PAGE === */
+
+body {
+  background: #ffffff;
+  margin: 0;
+  padding: 6vh 8vw;         /* vide autour du contenu */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #222;
+  line-height: 1.7;
+  max-width: 900px;         /* largeur maximale du texte */
+  margin-left: auto;
+  margin-right: auto;       /* centre le contenu */
+  box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+  border-radius: 12px;
+}
+
+/* Titres */
+
+h1, h2 {
+  text-align: center;
+  color: #000000;
+}
+
+h1 {
+  font-size: 2rem;
+  margin-bottom: .5rem;
+}
+
+h2 {
+  font-size: 1.5rem;
+  margin: 2rem 0 1rem;
+}
+
+strong {
+  display: block;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #111;
+  margin-top: 1.5rem;
+}
+
+/* Paragraphes */
+
+p {
+  text-align: justify;
+  margin: 1rem 0;
+}
+
+/* Listes */
+
+ul {
+  margin: 0 0 1.2rem 1.4rem;
+}
+
+li {
+  margin-bottom: .4rem;
+}
+
+/* Pied de page */
+
+footer {
+  text-align: center;
+  margin-top: 2rem;
+  font-size: .9rem;
+  color: #000000;
+}
+
+/* Responsive pour petits écrans */
+
+@media (max-width: 600px) {
+  body {
+    padding: 4vh 4vw;
+  }
+
+  h1 {
+    font-size: 1.6rem;
+  }
+
+  h2 {
+    font-size: 1.3rem;
+  }
+
+  strong {
+    font-size: 1rem;
+  }
+}

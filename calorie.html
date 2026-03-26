@@ -1,0 +1,124 @@
+
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Macro Calculator</title>
+  <link rel="stylesheet" href="calorie.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+  <div class="marquee">
+    <span id="pubText">Enter your details and get your personalized macro needs! </span>
+  </div>
+ 
+  <h3>"Fuel your goals, sculpt your strength."</h3>
+<h4>This Macro Calculator helps you discover the ideal balance of protein, carbs, and fat tailored to your body, lifestyle, and fitness ambitions. Whether you aim to lose fat, build muscle, or maintain your weight, your journey starts here.
+Enter your stats, select your goal, and unlock the numbers that will power your transformation.
+Let science meet purpose — one macro at a time</h4>
+
+<h1>Macro Calculator
+  
+</h1>
+
+  <form id="macroForm">
+    <label for="sex">Sex:</label>
+    <select id="sex" required>
+      <option value="male">Male</option>
+      <option value="female">Female</option>
+    </select>
+
+    <label for="age">Age:</label>
+    <input type="number" id="age" required />
+
+    <label for="height">Height (cm):</label>
+    <input type="number" id="height" required />
+
+    <label for="weight">Weight (kg):</label>
+    <input type="number" id="weight" required />
+
+    <label for="activity">Activity Level:</label>
+    <select id="activity" required>
+      <option value="1.2">Sedentary</option>
+      <option value="1.375">Light Exercise</option>
+      <option value="1.55">Moderate Exercise</option>
+      <option value="1.725">Heavy Exercise</option>
+      <option value="1.9">Athlete</option>
+    </select>
+
+    <label for="goal">Goal (per week):</label>
+    <select id="goal" required>
+      <option value="-1000">Lose 1 kg/week</option>
+      <option value="-500">Lose 0.5 kg/week</option>
+      <option value="-250">Lose 0.25 kg/week</option>
+      <option value="0">Maintain</option>
+      <option value="250">Gain 0.25 kg/week</option>
+      <option value="500">Gain 0.5 kg/week</option>
+      <option value="1000">Gain 1 kg/week</option>
+    </select>
+
+    <button type="submit">Calculate</button>
+  </form>
+
+  <!-- Résultats à afficher en dessous du formulaire -->
+  <div class="results" id="results" style="display: none;">
+    <h2>Results</h2>
+    <p><strong>BMR:</strong> <span id="bmr"></span> kcal/day</p>
+    <p><strong>TDEE:</strong> <span id="tdee"></span> kcal/day</p>
+    <p><strong>Calories/day:</strong> <span id="calories"></span></p>
+    <p><strong>Protein:</strong> <span id="protein"></span> g</p>
+    <p><strong>Carbs:</strong> <span id="carbs"></span> g</p>
+    <p><strong>Fat:</strong> <span id="fat"></span> g</p>
+  </div>
+<!-- Button for returning to a previous page -->
+ <a href ="home.html" class ="Return ">Return </a>
+
+
+<!-- Lien "Learn more about macros" en bas à droite -->
+<a href="learnmoremacros.html" class="learn-more">Learn more about macros!</a>
+
+  <script>
+    document.getElementById('macroForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      const sex = document.getElementById('sex').value;
+      const age = parseInt(document.getElementById('age').value);
+      const height = parseFloat(document.getElementById('height').value);
+      const weight = parseFloat(document.getElementById('weight').value);
+      const activity = parseFloat(document.getElementById('activity').value);
+      const goal = parseInt(document.getElementById('goal').value);
+
+      // Calcul du BMR (Basal Metabolic Rate)
+      let bmr;
+      if (sex === 'male') {
+        bmr = 10 * weight + 6.25 * height - 5 * age + 5;
+      } else {
+        bmr = 10 * weight + 6.25 * height - 5 * age - 161;
+      }
+
+      // Calcul du TDEE (Total Daily Energy Expenditure)
+      const tdee = bmr * activity;
+
+      // Calcul des calories, protéines, lipides, et glucides
+      const maintenance = bmr * activity;
+      const calories = maintenance + goal;
+
+      const protein = weight * 2;
+      const fat = (0.25 * calories) / 9;
+      const carbs = (calories - (protein * 4 + fat * 9)) / 4;
+
+      // Mise à jour des résultats sur la page
+      document.getElementById('bmr').textContent = Math.round(bmr);
+      document.getElementById('tdee').textContent = Math.round(tdee);
+      document.getElementById('calories').textContent = Math.round(calories);
+      document.getElementById('protein').textContent = Math.round(protein);
+      document.getElementById('carbs').textContent = Math.round(carbs);
+      document.getElementById('fat').textContent = Math.round(fat);
+
+      // Afficher les résultats sous le formulaire
+      document.getElementById('results').style.display = 'block';
+    });
+  </script>
+</body>
+</html>
+ 
